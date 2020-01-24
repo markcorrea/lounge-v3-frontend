@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react'
 import SwipeableViews from 'react-swipeable-views'
 
 import TerminalCard from '@ui/TerminalCard'
+import Spinner from '@ui/Spinner'
 
 import services from '@services'
 import sound from '../../media/sound/buzz.mp3'
@@ -16,6 +17,7 @@ const Terminal = ({ match: { params } }) => {
   const { getOrdersByTerminal, getTerminal, setReadyOrder } = services
   const [orders, setOrders] = useState([])
   const [terminalName, setTerminalName] = useState('')
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     fetchTerminal()
@@ -47,6 +49,24 @@ const Terminal = ({ match: { params } }) => {
     fetchOrders()
   }
 
+  const clearTerminal = () => {
+    setLoading(true)
+    const orderConfirmations = []
+
+    orders.map(async order => {
+      orderConfirmations.push(setReadyOrder(order))
+    })
+
+    Promise.all(orderConfirmations).then(
+      async () => {
+        await fetchOrders()
+        console.log('all confirmed')
+        setLoading(false)
+      },
+      () => setLoading(false)
+    )
+  }
+
   const OrderList = () => {
     return orders.map((order, orderIndex) => {
       return (
@@ -68,8 +88,26 @@ const Terminal = ({ match: { params } }) => {
 
   return (
     <Fragment>
+      <a
+        onClick={clearTerminal}
+        className='btn btn-primary btn-icon-split'
+        style={{ float: 'right', color: 'white' }}
+      >
+        <span className='text'>Clear all</span>
+      </a>
       <h1 className='h3 mb-2 text-gray-800'>Terminal: {terminalName}</h1>
-      {orders && orders.length > 0 ? <OrderList /> : <div>There are no pending orders.</div>}
+      <p>&nbsp;</p>
+      {!loading ? (
+        <>
+          {orders && orders.length > 0 ? (
+            <OrderList />
+          ) : (
+            <div>There are no pending orders.</div>
+          )}
+        </>
+      ) : (
+        <Spinner />
+      )}
     </Fragment>
   )
 }
