@@ -60,7 +60,6 @@ const Terminal = ({ match: { params } }) => {
     Promise.all(orderConfirmations).then(
       async () => {
         await fetchOrders()
-        console.log('all confirmed')
         setLoading(false)
       },
       () => setLoading(false)
