@@ -27,7 +27,6 @@ const Client = ({ match: { params }, history }) => {
     const result = await getClient(clientId)
     if (result) {
       if (isMounted) {
-        console.log('result', result)
         setClient(result.data.client)
       }
       return () => {
