@@ -15,6 +15,8 @@ import CashierTickets from '@modules/Cashier/CashierTickets'
 import CashierTicket from '@modules/Cashier/CashierTicket'
 import CashierBalance from '@modules/Cashier/CashierBalance'
 import CashierSale from '@modules/Cashier/CashierSale'
+import Clients from '@modules/Client/Clients'
+import Client from '@modules/Client/Client'
 import Terminals from '@modules/Terminal/Terminals'
 import Terminal from '@modules/Terminal/Terminal'
 
@@ -113,6 +115,13 @@ const MainContainer = ({ match, history }) => {
                 exact
                 path={`${match.path}/cashier/:cashierId/sale`}
                 component={CashierSale}
+              />
+              <Route exact path={`${match.path}/clients`} component={Clients} />
+              <Route
+                exact
+                path={`${match.path}/client/:id`}
+                match={match}
+                component={Client}
               />
               <Route
                 exact
