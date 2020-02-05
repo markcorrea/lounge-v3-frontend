@@ -17,6 +17,8 @@ import CashierBalance from '@modules/Cashier/CashierBalance'
 import CashierSale from '@modules/Cashier/CashierSale'
 import Clients from '@modules/Client/Clients'
 import Client from '@modules/Client/Client'
+import Permissions from '@modules/Permission/Permissions'
+import Permission from '@modules/Permission/Permission'
 import Terminals from '@modules/Terminal/Terminals'
 import Terminal from '@modules/Terminal/Terminal'
 
@@ -119,9 +121,26 @@ const MainContainer = ({ match, history }) => {
               <Route exact path={`${match.path}/clients`} component={Clients} />
               <Route
                 exact
+                path={`${match.path}/client`}
+                match={match}
+                component={Client}
+              />
+              <Route
+                exact
                 path={`${match.path}/client/:id`}
                 match={match}
                 component={Client}
+              />
+              <Route
+                exact
+                path={`${match.path}/permissions`}
+                component={Permissions}
+              />
+              <Route
+                exact
+                path={`${match.path}/permission/:id`}
+                match={match}
+                component={Permission}
               />
               <Route
                 exact

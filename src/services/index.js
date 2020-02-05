@@ -7,9 +7,9 @@ import user from '@services/user'
 import cashier from '@services/cashier'
 import order from '@services/order'
 import menu from '@services/menu'
+import permission from '@services/permission'
 
-
-const functions  = {
+const functions = {
   ...client,
   ...login,
   ...product,
@@ -19,6 +19,7 @@ const functions  = {
   ...cashier,
   ...order,
   ...menu,
+  ...permission,
 }
 
 export default functions

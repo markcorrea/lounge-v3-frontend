@@ -11,7 +11,7 @@ const login = body => {
       verifyResponseMessage(response)
       return true
     })
-    .catch(() => {
+    .catch((e) => {
       return false
     })
 }

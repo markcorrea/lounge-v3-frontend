@@ -15,7 +15,6 @@ const Client = ({ match: { params }, history }) => {
 
   useEffect(() => {
     ;(async () => {
-      console.log('clientId', clientId)
       if (clientId) {
         getClientData(clientId)
       }
@@ -26,6 +25,7 @@ const Client = ({ match: { params }, history }) => {
     isMounted = true
     const result = await getClient(clientId)
     if (result) {
+      console.log('client', result)
       if (isMounted) {
         setClient(result.data.client)
       }
@@ -72,6 +72,54 @@ const Client = ({ match: { params }, history }) => {
               type='text'
               className='form-control form-control-user'
               value={client.name || ''}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+        <div className='col-md-6 col-sm-12'>
+          <div className='form-group'>
+            <div className='small mb-1'>Unique Number:</div>
+            <input
+              name='uniqueNumber'
+              type='text'
+              className='form-control form-control-user'
+              value={client.uniqueNumber || ''}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+        <div className='col-md-6 col-sm-12'>
+          <div className='form-group'>
+            <div className='small mb-1'>Telephone:</div>
+            <input
+              name='telephone'
+              type='text'
+              className='form-control form-control-user'
+              value={client.telephone || ''}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+        <div className='col-md-6 col-sm-12'>
+          <div className='form-group'>
+            <div className='small mb-1'>Birthdate:</div>
+            <input
+              name='birthdate'
+              type='text'
+              className='form-control form-control-user'
+              value={client.birthdate || ''}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+        <div className='col-md-6 col-sm-12'>
+          <div className='form-group'>
+            <div className='small mb-1'>E-mail:</div>
+            <input
+              name='email'
+              type='text'
+              className='form-control form-control-user'
+              value={client.email || ''}
               onChange={handleInputChange}
             />
           </div>
