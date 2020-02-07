@@ -4,15 +4,19 @@ import ChoiceModal from '@ui/ChoiceModal'
 import { openModal, toCurrencyReal } from '@utilities'
 
 const defineDisplay = (column, colIndex, rowIndex, rowData) => {
-  if(column.hasOwnProperty('display') && column.display == 'currency') {
-    return <td key={`cell_${rowIndex}_${colIndex}`}>
-      {rowData[column.name] ? toCurrencyReal(rowData[column.name]) : '-'}
-    </td>
+  if (column.hasOwnProperty('display') && column.display == 'currency') {
+    return (
+      <td key={`cell_${rowIndex}_${colIndex}`}>
+        {rowData[column.name] ? toCurrencyReal(rowData[column.name]) : '-'}
+      </td>
+    )
   }
 
-  return <td key={`cell_${rowIndex}_${colIndex}`}>
-    {rowData[column.name] ? rowData[column.name] : '-'}
-  </td>
+  return (
+    <td key={`cell_${rowIndex}_${colIndex}`}>
+      {rowData[column.name] ? rowData[column.name] : '-'}
+    </td>
+  )
 }
 
 const RenderHeaders = ({ columns }) =>
@@ -24,6 +28,7 @@ const RenderRows = ({
   columns,
   data,
   onEdit = null,
+  onView = null,
   disableEdition,
   onDelete = null,
   confirmDelete,
@@ -33,7 +38,14 @@ const RenderRows = ({
       <tr key={`row_${rowIndex}`}>
         {columns.map((column, colIndex) => {
           return defineDisplay(column, colIndex, rowIndex, rowData)
-    })}
+        })}
+        {onView && (
+          <td className='icon'>
+            <a onClick={() => onView(rowData._id)}>
+              <i className='fas fa-eye view' />
+            </a>
+          </td>
+        )}
         {onEdit && (
           <td className='icon'>
             {disableEdition && disableEdition(rowData) ? (
@@ -85,6 +97,7 @@ const DataTable = props => {
         <thead>
           <tr>
             <RenderHeaders columns={props.columns} />
+            {props.onView && <th>View</th>}
             {props.onEdit && <th>Edit</th>}
             {props.onDelete && <th>Delete</th>}
           </tr>
@@ -96,9 +109,13 @@ const DataTable = props => {
               <td className='total' colSpan={4}>
                 <span>Total: </span>
                 <span className='total-value'>
-                {toCurrencyReal(props.data.reduce((accumulator, currentValue) => {
-                    return accumulator + currentValue[props.totalAttributeName]
-                  }, 0))}
+                  {toCurrencyReal(
+                    props.data.reduce((accumulator, currentValue) => {
+                      return (
+                        accumulator + currentValue[props.totalAttributeName]
+                      )
+                    }, 0)
+                  )}
                 </span>
               </td>
             </tr>

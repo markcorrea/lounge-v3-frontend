@@ -95,6 +95,10 @@
       width: 100%;
       height: 100%;
       text-align: center;
+      .view {
+        color: $standardBlue;
+        opacity: 0.8;
+      }
       .edit {
         color: $standardBlue;
         opacity: 0.8;

@@ -20,6 +20,7 @@ import Client from '@modules/Client/Client'
 import Permissions from '@modules/Permission/Permissions'
 import Permission from '@modules/Permission/Permission'
 import Terminals from '@modules/Terminal/Terminals'
+import TerminalView from '@modules/Terminal/TerminalView'
 import Terminal from '@modules/Terminal/Terminal'
 
 import services from '@services'
@@ -138,19 +139,35 @@ const MainContainer = ({ match, history }) => {
               />
               <Route
                 exact
+                path={`${match.path}/permission`}
+                match={match}
+                component={Permission}
+              />
+              <Route
+                exact
                 path={`${match.path}/permission/:id`}
                 match={match}
                 component={Permission}
               />
               <Route
                 exact
-                path={`${match.path}/terminal`}
+                path={`${match.path}/terminals`}
                 component={Terminals}
               />
               <Route
                 exact
-                path={`${match.path}/terminal/:terminalId`}
+                path={`${match.path}/terminal`}
                 component={Terminal}
+              />
+              <Route
+                exact
+                path={`${match.path}/terminal/:id`}
+                component={Terminal}
+              />
+              <Route
+                exact
+                path={`${match.path}/terminal/view/:id`}
+                component={TerminalView}
               />
             </Switch>
           </div>
