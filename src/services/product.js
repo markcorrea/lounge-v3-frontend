@@ -20,9 +20,9 @@ const searchProducts = body => {
     })
 }
 
-const getProducts = () => {
+const getProducts = (page = 1) => {
   return axios
-    .get(`${server}/products`, {
+    .get(`${server}/products?page=${page}`, {
       headers: {
         token: verifyToken(),
       },
@@ -186,5 +186,5 @@ export default {
   payProducts,
   removeProducts,
   mockSearchProducts,
-  payProductsOnCashier
+  payProductsOnCashier,
 }

@@ -104,10 +104,10 @@ const Client = ({ match: { params }, history }) => {
           <div className='form-group'>
             <div className='small mb-1'>Birthdate:</div>
             <input
-              name='birthdate'
+              name='birthDate'
               type='text'
               className='form-control form-control-user'
-              value={client.birthdate || ''}
+              value={client.birthDate || ''}
               onChange={handleInputChange}
             />
           </div>
