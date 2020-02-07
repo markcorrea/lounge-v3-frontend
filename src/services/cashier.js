@@ -3,38 +3,38 @@ import { cashiers } from '@services/mocks'
 import { verifyToken, showMessage, verifyResponseMessage } from '@utilities'
 const server = process.env.API_URL
 
-const getCashiers = () => {
+const getCashiers = (page = 1) => {
   return axios
-  .get(`${server}/cashiers`, {
-    headers: {
-      token: verifyToken(),
-    },
-  })
-  .then(response => {
-    verifyResponseMessage(response)
-    return response
-  })
-  .catch(error => {
-    console.log('erro', error.response.status)
-    return false
-  })
+    .get(`${server}/cashiers?page=${page}`, {
+      headers: {
+        token: verifyToken(),
+      },
+    })
+    .then(response => {
+      verifyResponseMessage(response)
+      return response
+    })
+    .catch(error => {
+      console.log('erro', error.response.status)
+      return false
+    })
 }
 
 const getCashier = cashierId => {
   return axios
-  .get(`${server}/cashiers/${cashierId}`, {
-    headers: {
-      token: verifyToken(),
-    },
-  })
-  .then(response => {
-    verifyResponseMessage(response)
-    return response
-  })
-  .catch(error => {
-    console.log('erro', error.response.status)
-    return false
-  })
+    .get(`${server}/cashiers/${cashierId}`, {
+      headers: {
+        token: verifyToken(),
+      },
+    })
+    .then(response => {
+      verifyResponseMessage(response)
+      return response
+    })
+    .catch(error => {
+      console.log('erro', error.response.status)
+      return false
+    })
 }
 // MOCK DATA
 const deleteCashier = cashierId => {
@@ -79,11 +79,15 @@ const closeCashier = body => {
 
 const payProduct = body => {
   return axios
-    .post(`${server}/cashiers/${body.cashierID}/pay/${body.productId}`, {}, {
-      headers: {
-        token: verifyToken(),
-      },
-    })
+    .post(
+      `${server}/cashiers/${body.cashierID}/pay/${body.productId}`,
+      {},
+      {
+        headers: {
+          token: verifyToken(),
+        },
+      }
+    )
     .then(response => {
       verifyResponseMessage(response)
       return response
@@ -101,5 +105,5 @@ export default {
   deleteCashier,
   openCashier,
   closeCashier,
-  payProduct
+  payProduct,
 }

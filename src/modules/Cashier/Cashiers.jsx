@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import ChoiceModal from '@ui/ChoiceModal'
+import Pagination from 'react-bootstrap/Pagination'
 
 import DataTable from '@ui/DataTable'
 import services from '@services'
@@ -8,37 +9,60 @@ import { openModal } from '@utilities'
 const Cashiers = ({ history }) => {
   const { getCashiers, openCashier } = services
   const [cashierList, setCashierList] = useState([])
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
 
   useEffect(() => {
-      fetchCashiers()
+    fetchCashiers()
   }, [])
 
-  const fetchCashiers = async () => {
-    let result = await getCashiers()
+  const fetchCashiers = async (page = 1) => {
+    let result = await getCashiers(page)
 
-    result.data.cashiers.map((cashier) => {
+    result.data.cashiers.map(cashier => {
       if (cashier.hasOwnProperty('openDate') && cashier.openDate != undefined) {
         let date = new Date(cashier.openDate)
-        cashier.openDate = date.toLocaleString("pt-BR")
+        cashier.openDate = date.toLocaleString('pt-BR')
       }
 
-      if (cashier.hasOwnProperty('closeDate') && cashier.closeDate != undefined) {
+      if (
+        cashier.hasOwnProperty('closeDate') &&
+        cashier.closeDate != undefined
+      ) {
         let date = new Date(cashier.closeDate)
-        cashier.closeDate = date.toLocaleString("pt-BR")
+        cashier.closeDate = date.toLocaleString('pt-BR')
       }
     })
 
+    setPage(page)
+    setTotalPages(result.data.totalPages)
     setCashierList(result.data.cashiers)
   }
 
   const openNewCashier = async () => {
-    let cashier = {name: 'marcus'}
+    let cashier = { name: 'marcus' }
     await openCashier(cashier)
     fetchCashiers()
   }
 
   const editCashier = _id => {
     history.push(`/main/cashier/${_id}`)
+  }
+
+  const pageItems = () => {
+    let items = []
+    for (let i = 0; i < totalPages; i++) {
+      items.push(
+        <Pagination.Item
+          onClick={() => fetchCashiers(i + 1)}
+          key={i + 1}
+          active={i + 1 === page}
+        >
+          {i + 1}
+        </Pagination.Item>
+      )
+    }
+    return items
   }
 
   const columns = [
@@ -57,7 +81,7 @@ const Cashiers = ({ history }) => {
     {
       label: 'Total Price',
       name: 'price',
-      display: 'currency'
+      display: 'currency',
     },
   ]
 
@@ -89,6 +113,15 @@ const Cashiers = ({ history }) => {
                     data={cashierList}
                     onEdit={editCashier}
                   />
+                )}
+              </div>
+              <div className='col-md-12'>
+                {cashierList && cashierList.length > 0 && (
+                  <Pagination>
+                    <Pagination.Prev onClick={() => fetchCashiers(page - 1)} />
+                    {pageItems()}
+                    <Pagination.Next onClick={() => fetchCashiers(page + 1)} />
+                  </Pagination>
                 )}
               </div>
             </div>
