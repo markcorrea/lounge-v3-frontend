@@ -21,7 +21,7 @@ const Login = ({ history }) => {
     if (loginStatus) {
       history.push('/main')
     } else {
-      alert('Unauthorized')
+      alert('Não autorizado')
     }
   }
 
@@ -57,7 +57,7 @@ const Login = ({ history }) => {
                             type='password'
                             className='form-control form-control-user'
                             id='exampleInputPassword'
-                            placeholder='Password'
+                            placeholder='Senha'
                             name='password'
                             value={loginData.password}
                             onChange={handleInputChange}
@@ -72,7 +72,7 @@ const Login = ({ history }) => {
                       </form>
                       <div className='text-center'>
                         <a className='small' href='forgot-password.html'>
-                          Forgot my password
+                          Esqueci minha senha
                         </a>
                       </div>
                     </div>

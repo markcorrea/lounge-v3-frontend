@@ -13,7 +13,7 @@ import services from '@services'
 import { showMessage, toCurrencyReal, openModal } from '@utilities'
 
 const InputModalInformation = () => {
-  return `New table number:`
+  return `Número da nova mesa:`
 }
 
 class EditTicket extends React.Component {
@@ -84,7 +84,7 @@ class EditTicket extends React.Component {
   }
 
   addProduct = async (product, search) => {
-    this.setState({disabled: true})
+    this.setState({ disabled: true })
     let productData = {
       isUniqueNumber: product !== null ? false : true,
       criteria: product !== null ? product._id : search,
@@ -94,11 +94,11 @@ class EditTicket extends React.Component {
 
     if (result) {
       this.fetchTicket()
-      this.setState({disabled: false})
+      this.setState({ disabled: false })
       return
     }
-    showMessage('Product not found', 'info')
-    this.setState({disabled: false})
+    showMessage('Produto não encontrado', 'info')
+    this.setState({ disabled: false })
   }
 
   confirmInputModal = async nextTable => {
@@ -109,7 +109,7 @@ class EditTicket extends React.Component {
       this.props.history.push(`/main/edit-ticket/${nextTable}`)
       return
     }
-    showMessage('Error: could not change the table.', 'info')
+    showMessage('Erro: Não foi possível alterar mesa.', 'info')
   }
 
   render() {
@@ -121,13 +121,13 @@ class EditTicket extends React.Component {
           onClick={() => openModal('inputModal')}
           className='btn btn-success btn-icon-split'
         >
-          <span className='text'>Change table</span>
+          <span className='text'>Mudar mesa</span>
         </button>
         <h1 className='h3 text-gray-800'>
-          Edit ticket {this.props.match.params.uniqueNumber}
+          Editar comanda {this.props.match.params.uniqueNumber}
         </h1>
         <p className='mb-4'>
-          Client:{' '}
+          Cliente:{' '}
           {this.state.ticket.name || <InlineButton click={this.toggleModal} />}
         </p>
         <AsyncProductSearch
@@ -156,7 +156,7 @@ class EditTicket extends React.Component {
             <Spinner />
           ) : (
             <div style={{ margin: '20px auto' }}>
-              No registered orders.
+              Não há pedidos registrados.
             </div>
           )}
         </div>
@@ -177,7 +177,7 @@ class EditTicket extends React.Component {
           <div className='modal-dialog modal-xl'>
             <div className='modal-content'>
               <div className='modal-container'>
-                <h1 className='h3 mb-0 text-gray-800'>New client</h1>
+                <h1 className='h3 mb-0 text-gray-800'>Novo cliente</h1>
                 <div className='row mt-50'>
                   <div className='col-md-12' style={{ zIndex: 10 }}>
                     <AsyncClientSearch
@@ -230,14 +230,14 @@ class EditTicket extends React.Component {
                       style={{ marginLeft: '20px', float: 'right' }}
                       className='btn btn-primary btn-icon-split react-link'
                     >
-                      <span className='text'>Save</span>
+                      <span className='text'>Salvar</span>
                     </a>
                     <a
                       onClick={this.toggleModal}
                       style={{ marginLeft: '20px', float: 'right' }}
                       className='btn btn-light btn-icon-split'
                     >
-                      <span className='text'>Cancel</span>
+                      <span className='text'>Cancelar</span>
                     </a>
                   </div>
                 </div>

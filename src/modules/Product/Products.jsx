@@ -41,7 +41,7 @@ const Products = ({ history }) => {
   const removeProduct = async _id => {
     const result = await deleteProduct(_id)
     if (!result) {
-      showMessage('Error: could not remove product.', 'error')
+      showMessage('Erro: Não foi possível remover produto.', 'error')
       return
     }
     fetchProducts()
@@ -70,11 +70,11 @@ const Products = ({ history }) => {
 
   const columns = [
     {
-      label: 'Name',
+      label: 'Nome',
       name: 'name',
     },
     {
-      label: 'Quantity',
+      label: 'Quantidade',
       name: 'quantity',
     },
     {
@@ -82,7 +82,7 @@ const Products = ({ history }) => {
       name: 'terminal',
     },
     {
-      label: 'Price',
+      label: 'Valor',
       name: 'price',
       display: 'currency',
     },
@@ -101,11 +101,11 @@ const Products = ({ history }) => {
         >
           <i className='fas fa-plus' />
         </span>
-        <span className='text'>New Product</span>
+        <span className='text'>Novo produto</span>
       </Link>
-      <h1 className='h3 mb-2 text-gray-800'>Products</h1>
+      <h1 className='h3 mb-2 text-gray-800'>Produtos</h1>
       <p className='mb-4'>
-        List of available products. Use the search field to filter.
+        Lista de produtos disponíveis. Use o campo de busca para filtrar.
       </p>
 
       <div className='card shadow mb-4'>
@@ -115,7 +115,7 @@ const Products = ({ history }) => {
               <div className='col-md-12'>
                 <div className='table-filter'>
                   <label>
-                    Search:
+                    Busca:
                     <AsyncInput
                       callbackFunction={search => searchProduct(search)}
                     />

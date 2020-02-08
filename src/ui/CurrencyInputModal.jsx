@@ -48,14 +48,14 @@ const CurrencyInputModal = ({ id, title, description, onConfirm }) => {
               className='btn btn-secondary'
               onClick={() => closeModal(id)}
             >
-              Close
+              Fechar
             </button>
             <button
               type='button'
               className='btn btn-primary'
               onClick={clickConfirm}
             >
-              Confirm
+              Confirmar
             </button>
           </div>
         </div>

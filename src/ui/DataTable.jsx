@@ -68,7 +68,7 @@ const RenderRows = ({
     ))}
     {data.length < 1 && (
       <tr>
-        <td colSpan={6}>No items registered.</td>
+        <td colSpan={6}>Não há itens registrados.</td>
       </tr>
     )}
   </Fragment>
@@ -78,7 +78,7 @@ const DataTable = props => {
   let idToDelete = null
 
   const DeleteInformation = items => {
-    return `Remove this item?`
+    return `Remover item?`
   }
 
   const confirmDelete = _id => {
@@ -97,9 +97,9 @@ const DataTable = props => {
         <thead>
           <tr>
             <RenderHeaders columns={props.columns} />
-            {props.onView && <th>View</th>}
-            {props.onEdit && <th>Edit</th>}
-            {props.onDelete && <th>Delete</th>}
+            {props.onView && <th>Visualizar</th>}
+            {props.onEdit && <th>Editar</th>}
+            {props.onDelete && <th>Deletar</th>}
           </tr>
         </thead>
         <tbody>
@@ -124,7 +124,7 @@ const DataTable = props => {
       </table>
       <ChoiceModal
         id='deleteModal'
-        title='Confirmation'
+        title='Confirmar'
         description={<DeleteInformation />}
         onConfirm={() => props.onDelete(idToDelete)}
       />

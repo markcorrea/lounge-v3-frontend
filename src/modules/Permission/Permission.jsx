@@ -33,7 +33,7 @@ const Permission = ({ match: { params }, history }) => {
       }
     }
 
-    alert('Permission not found')
+    alert('Permissão não encontrada.')
     history.push('/main/permissions')
   }
 
@@ -48,7 +48,7 @@ const Permission = ({ match: { params }, history }) => {
     const result = await service(body)
     if (result) {
     } else {
-      showMessage('Error: could not register permission', 'error')
+      showMessage('Erro: Não foi possível registrar permissão', 'error')
       return
     }
     history.push('/main/permissions')
@@ -58,14 +58,14 @@ const Permission = ({ match: { params }, history }) => {
     <Fragment>
       <div className='row d-sm-flex align-items-center justify-content-between mb-4'>
         <h1 className='h3 mb-0 text-gray-800'>
-          {permissionId ? 'Edit' : 'New'} Permission
+          {permissionId ? 'Editar' : 'Nova'} Permissão
         </h1>
       </div>
 
       <div className='row'>
         <div className='col-md-6 col-sm-12'>
           <div className='form-group'>
-            <div className='small mb-1'>Name:</div>
+            <div className='small mb-1'>Nome:</div>
             <input
               name='name'
               type='text'
@@ -82,13 +82,13 @@ const Permission = ({ match: { params }, history }) => {
             className='btn btn-success btn-icon-split react-link form-button'
             onClick={() => save(permission)}
           >
-            <span className='text'>Save</span>
+            <span className='text'>Salvar</span>
           </a>
           <a
             className='btn btn-light btn-icon-split form-button'
             onClick={() => history.push('/main/permissions')}
           >
-            <span className='text'>Cancel</span>
+            <span className='text'>Cancelar</span>
           </a>
         </div>
       </div>

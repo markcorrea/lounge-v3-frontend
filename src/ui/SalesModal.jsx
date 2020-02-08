@@ -6,7 +6,6 @@ import services from '@services'
 import { openModal, closeModal } from '@utilities'
 
 const SalesModal = ({ id, title, cashierId }) => {
-
   const { searchProducts, payProduct } = services
 
   const [productList, setProductList] = useState([])
@@ -14,28 +13,30 @@ const SalesModal = ({ id, title, cashierId }) => {
 
   const columns = [
     {
-      label: 'Product',
+      label: 'Produto',
       name: 'name',
     },
     {
-      label: 'Price',
+      label: 'Valor',
       name: 'totalPrice',
     },
   ]
 
-  const confirmModal = (productId) => {
+  const confirmModal = productId => {
     setProductId(productId)
     openModal('confirmSale')
   }
 
   const confirmSale = async () => {
-    let result = await payProduct({cashierID: cashierId, productId: productId})
-    if(result) {
+    let result = await payProduct({
+      cashierID: cashierId,
+      productId: productId,
+    })
+    if (result) {
       closeModal('confirmSale')
       closeModal('salesModal')
       return
     }
-    console.log('failure')
   }
 
   const searchProduct = async search => {
@@ -53,7 +54,7 @@ const SalesModal = ({ id, title, cashierId }) => {
               type='button'
               className='close'
               data-dismiss='modal'
-              aria-label='Close'
+              aria-label='Fechar'
             >
               <span aria-hidden='true'>&times;</span>
             </button>
@@ -63,7 +64,7 @@ const SalesModal = ({ id, title, cashierId }) => {
               <div className='col-md-12'>
                 <div className='table-filter'>
                   <label>
-                    Search:
+                    Buscar:
                     <AsyncInput
                       callbackFunction={search => searchProduct(search)}
                     />
@@ -81,9 +82,9 @@ const SalesModal = ({ id, title, cashierId }) => {
                 >
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Price</th>
-                      <th>Confirm</th>
+                      <th>Nome</th>
+                      <th>Valor</th>
+                      <th>Confirmar</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -103,7 +104,7 @@ const SalesModal = ({ id, title, cashierId }) => {
                     ))}
                     {productList.length < 1 && (
                       <tr>
-                        <td colSpan={6}>No items registered.</td>
+                        <td colSpan={6}>Não há itens registrados.</td>
                       </tr>
                     )}
                   </tbody>
@@ -124,8 +125,8 @@ const SalesModal = ({ id, title, cashierId }) => {
       </div>
       <ChoiceModal
         id='confirmSale'
-        title='Confirm sale?'
-        description='Confirm sale?'
+        title='Confirmar venda?'
+        description='Confirmar venda?'
         onConfirm={() => confirmSale()}
       />
     </div>

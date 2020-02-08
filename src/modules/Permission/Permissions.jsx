@@ -30,7 +30,7 @@ const Permissions = ({ history }) => {
   const removePermission = async _id => {
     const result = await deletePermission(_id)
     if (!result) {
-      showMessage('Error: could not remove permission.', 'error')
+      showMessage('Erro: Não foi possível remover permissão.', 'error')
       return
     }
     fetchPermissions()
@@ -38,7 +38,7 @@ const Permissions = ({ history }) => {
 
   const columns = [
     {
-      label: 'Name',
+      label: 'Nome',
       name: 'name',
     },
   ]
@@ -56,10 +56,10 @@ const Permissions = ({ history }) => {
         >
           <i className='fas fa-plus' />
         </span>
-        <span className='text'>New Permission</span>
+        <span className='text'>Nova permissão</span>
       </Link>
-      <h1 className='h3 mb-2 text-gray-800'>Permissions</h1>
-      <p className='mb-4'>List of available permissions.</p>
+      <h1 className='h3 mb-2 text-gray-800'>Permissões</h1>
+      <p className='mb-4'>Lista de permissões possíveis.</p>
 
       <div className='card shadow mb-4'>
         <div className='card-body'>

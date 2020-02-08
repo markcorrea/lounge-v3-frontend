@@ -31,7 +31,7 @@ const Clients = ({ history }) => {
   const removeClient = async _id => {
     const result = await deleteClient(_id)
     if (!result) {
-      showMessage('Error: could not remove client.', 'error')
+      showMessage('Erro: Não foi possível remover cliente.', 'error')
       return
     }
     fetchClients()
@@ -44,7 +44,7 @@ const Clients = ({ history }) => {
 
   const columns = [
     {
-      label: 'Name',
+      label: 'Nome',
       name: 'name',
     },
   ]
@@ -62,11 +62,11 @@ const Clients = ({ history }) => {
         >
           <i className='fas fa-plus' />
         </span>
-        <span className='text'>New Client</span>
+        <span className='text'>Novo Cliente</span>
       </Link>
-      <h1 className='h3 mb-2 text-gray-800'>Clients</h1>
+      <h1 className='h3 mb-2 text-gray-800'>Clientes</h1>
       <p className='mb-4'>
-        List of available clients. Use the search field to filter.
+        Lista de clientes disponíveis. Use o campo de busca para filtrar.
       </p>
 
       <div className='card shadow mb-4'>
@@ -76,7 +76,7 @@ const Clients = ({ history }) => {
               <div className='col-md-12'>
                 <div className='table-filter'>
                   <label>
-                    Search:
+                    Busca:
                     <AsyncInput
                       callbackFunction={search => searchClient(search)}
                     />

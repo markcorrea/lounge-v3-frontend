@@ -18,7 +18,7 @@ const ChoiceModal = ({id, title, description, onConfirm}) => {
               type='button'
               className='close'
               data-dismiss='modal'
-              aria-label='Close'
+              aria-label='Fechar'
             >
               <span aria-hidden='true'>&times;</span>
             </button>
@@ -32,10 +32,10 @@ const ChoiceModal = ({id, title, description, onConfirm}) => {
               className='btn btn-secondary'
               onClick={() => closeModal(id)}
             >
-              No thanks
+              Não, obrigado
             </button>
             <button type='button' className='btn btn-primary' onClick={clickConfirm}>
-              Confirm
+              Confirmar
             </button>
           </div>
         </div>

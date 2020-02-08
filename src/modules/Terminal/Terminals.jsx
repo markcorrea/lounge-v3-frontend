@@ -33,7 +33,7 @@ const Terminals = ({ history }) => {
   const removeTerminal = async _id => {
     const result = await deleteTerminal(_id)
     if (!result) {
-      showMessage('Error: could not remove temrinal.', 'error')
+      showMessage('Erro: Não foi possível remover terminal.', 'error')
       return
     }
     fetchTerminals()
@@ -59,10 +59,10 @@ const Terminals = ({ history }) => {
         >
           <i className='fas fa-plus' />
         </span>
-        <span className='text'>New Terminal</span>
+        <span className='text'>Novo terminal</span>
       </Link>
-      <h1 className='h3 mb-2 text-gray-800'>Terminals</h1>
-      <p className='mb-4'>List of available terminals.</p>
+      <h1 className='h3 mb-2 text-gray-800'>Terminais</h1>
+      <p className='mb-4'>Lista de terminais disponíveis.</p>
 
       <div className='card shadow mb-4'>
         <div className='card-body'>

@@ -25,7 +25,6 @@ const Client = ({ match: { params }, history }) => {
     isMounted = true
     const result = await getClient(clientId)
     if (result) {
-      console.log('client', result)
       if (isMounted) {
         setClient(result.data.client)
       }
@@ -34,7 +33,7 @@ const Client = ({ match: { params }, history }) => {
       }
     }
 
-    alert('Client not found')
+    alert('Cliente não encontrado.')
     history.push('/main/clients')
   }
 
@@ -49,7 +48,7 @@ const Client = ({ match: { params }, history }) => {
     const result = await service(body)
     if (result) {
     } else {
-      showMessage('Error: could not register client', 'error')
+      showMessage('Erro: Não foi possível registrar cliente.', 'error')
       return
     }
     history.push('/main/clients')
@@ -59,14 +58,14 @@ const Client = ({ match: { params }, history }) => {
     <Fragment>
       <div className='row d-sm-flex align-items-center justify-content-between mb-4'>
         <h1 className='h3 mb-0 text-gray-800'>
-          {clientId ? 'Edit' : 'New'} Client
+          {clientId ? 'Editar' : 'Novo'} Cliente
         </h1>
       </div>
 
       <div className='row'>
         <div className='col-md-6 col-sm-12'>
           <div className='form-group'>
-            <div className='small mb-1'>Name:</div>
+            <div className='small mb-1'>Nome:</div>
             <input
               name='name'
               type='text'
@@ -78,7 +77,7 @@ const Client = ({ match: { params }, history }) => {
         </div>
         <div className='col-md-6 col-sm-12'>
           <div className='form-group'>
-            <div className='small mb-1'>Unique Number:</div>
+            <div className='small mb-1'>Código Único:</div>
             <input
               name='uniqueNumber'
               type='text'
@@ -90,7 +89,7 @@ const Client = ({ match: { params }, history }) => {
         </div>
         <div className='col-md-6 col-sm-12'>
           <div className='form-group'>
-            <div className='small mb-1'>Telephone:</div>
+            <div className='small mb-1'>Telefone:</div>
             <input
               name='telephone'
               type='text'
@@ -102,7 +101,7 @@ const Client = ({ match: { params }, history }) => {
         </div>
         <div className='col-md-6 col-sm-12'>
           <div className='form-group'>
-            <div className='small mb-1'>Birthdate:</div>
+            <div className='small mb-1'>Data de Nascimento:</div>
             <input
               name='birthDate'
               type='text'
@@ -131,13 +130,13 @@ const Client = ({ match: { params }, history }) => {
             className='btn btn-success btn-icon-split react-link form-button'
             onClick={() => save(client)}
           >
-            <span className='text'>Save</span>
+            <span className='text'>Salvar</span>
           </a>
           <a
             className='btn btn-light btn-icon-split form-button'
             onClick={() => history.push('/main/clients')}
           >
-            <span className='text'>Cancel</span>
+            <span className='text'>Cancelar</span>
           </a>
         </div>
       </div>

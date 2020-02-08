@@ -104,6 +104,23 @@ const deleteTerminal = _id => {
     })
 }
 
+const removeAllFromTerminal = _id => {
+  return axios
+    .post(`${server}/orders/terminal/${_id}/clean`, {
+      headers: {
+        token: verifyToken(),
+      },
+    })
+    .then(response => {
+      verifyResponseMessage(response)
+      return response
+    })
+    .catch(error => {
+      console.log('erro', error.response.status)
+      return false
+    })
+}
+
 const setReadyOrder = body => {
   return axios
     .post(`${server}/orders/ready/${body._id}`, body, {
@@ -129,4 +146,5 @@ export default {
   updateTerminal,
   deleteTerminal,
   setReadyOrder,
+  removeAllFromTerminal,
 }

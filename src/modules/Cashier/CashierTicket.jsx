@@ -96,13 +96,13 @@ const CashierTicket = ({ match: { params }, history }) => {
         data={products}
         paid={ticket.paid}
         totalPrice={ticket.totalPrice}
-        buttonSelectedLabel='Pay'
-        closeTicketLabel='Close ticket'
-        buttonDeleteLabel='Remove'
+        buttonSelectedLabel='Pagar'
+        closeTicketLabel='Fechar comanda'
+        buttonDeleteLabel='Remover'
         // creditLabel='Deixar um tanto aqui'
         returnCredit={returnCredit}
         returnCashierTable={returnCashierTable}
-        totalAttributeName='price'
+        totalAttributeName='valor'
       />
     )
   }
@@ -120,20 +120,20 @@ const CashierTicket = ({ match: { params }, history }) => {
       setLoading(false)
       return
     }
-    showMessage('Product not found', 'info')
+    showMessage('Produto não encontrado.', 'info')
     setLoading(false)
   }
 
   return (
     <Fragment>
       <h1 className='h3 mb-2 text-gray-800'>
-        Ticket - Table {ticket.uniqueNumber}
+        Comandas {ticket.uniqueNumber}
       </h1>
-      <p className='mb-4'>Client: {ticket.name || '-'}</p>
+      <p className='mb-4'>Cliente: {ticket.name || '-'}</p>
 
       <div className='card shadow mb-4'>
         <div className='card-body'>
-          <div className='card-body-title'>Add product</div>
+          <div className='card-body-title'>Adicionar produto</div>
           <div className='table-responsive'>
             <div className='row'>
               <div className='col-md-12'>
@@ -152,7 +152,7 @@ const CashierTicket = ({ match: { params }, history }) => {
 
       <div className='card shadow mb-4'>
         <div className='card-body'>
-          <div className='card-body-title'>Opened</div>
+          <div className='card-body-title'>Abertos</div>
           <div className='table-responsive'>
             <div className='row'>
               <div className='col-md-12'>{products && <PendingItems />}</div>

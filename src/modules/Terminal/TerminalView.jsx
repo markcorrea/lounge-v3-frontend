@@ -5,16 +5,20 @@ import TerminalCard from '@ui/TerminalCard'
 import Spinner from '@ui/Spinner'
 
 import services from '@services'
-import sound from '../../media/sound/buzz.mp3'
 
 import socketIOClient from 'socket.io-client'
 
 const server = process.env.API_SOCKET
 
 const TerminalView = ({ match: { params } }) => {
-  const terminalId = params.terminalId || null
+  const terminalId = params.id || null
 
-  const { getOrdersByTerminal, getTerminal, setReadyOrder } = services
+  const {
+    getOrdersByTerminal,
+    getTerminal,
+    setReadyOrder,
+    removeAllFromTerminal,
+  } = services
   const [orders, setOrders] = useState([])
   const [terminalName, setTerminalName] = useState('')
   const [loading, setLoading] = useState(false)
@@ -24,8 +28,6 @@ const TerminalView = ({ match: { params } }) => {
     fetchOrders()
     let socket = socketIOClient(`${server}`)
     socket.on(terminalId, () => {
-      var audio = new Audio(sound)
-      audio.play()
       fetchOrders()
     })
 
@@ -36,12 +38,16 @@ const TerminalView = ({ match: { params } }) => {
 
   const fetchOrders = async () => {
     let result = await getOrdersByTerminal(terminalId)
-    setOrders([...result.data.orders])
+    if (result) {
+      setOrders([...result.data.orders])
+    }
   }
 
   const fetchTerminal = async () => {
     let result = await getTerminal(terminalId)
-    setTerminalName(result.data.terminal.name)
+    if (result) {
+      setTerminalName(result.data.terminal.name)
+    }
   }
 
   const confirmOrder = async order => {
@@ -49,21 +55,12 @@ const TerminalView = ({ match: { params } }) => {
     fetchOrders()
   }
 
-  const clearTerminal = () => {
+  const clearTerminal = async () => {
     setLoading(true)
-    const orderConfirmations = []
+    await removeAllFromTerminal(terminalId)
+    fetchOrders()
 
-    orders.map(async order => {
-      orderConfirmations.push(setReadyOrder(order))
-    })
-
-    Promise.all(orderConfirmations).then(
-      async () => {
-        await fetchOrders()
-        setLoading(false)
-      },
-      () => setLoading(false)
-    )
+    setLoading(false)
   }
 
   const OrderList = () => {
@@ -92,7 +89,7 @@ const TerminalView = ({ match: { params } }) => {
         className='btn btn-primary btn-icon-split'
         style={{ float: 'right', color: 'white' }}
       >
-        <span className='text'>Clear all</span>
+        <span className='text'>Concluir todos</span>
       </a>
       <h1 className='h3 mb-2 text-gray-800'>Terminal: {terminalName}</h1>
       <p>&nbsp;</p>
@@ -101,7 +98,7 @@ const TerminalView = ({ match: { params } }) => {
           {orders && orders.length > 0 ? (
             <OrderList />
           ) : (
-            <div>There are no pending orders.</div>
+            <div>Não existem pedidos pendentes.</div>
           )}
         </>
       ) : (

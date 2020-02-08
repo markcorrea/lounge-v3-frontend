@@ -20,8 +20,6 @@ const Socket = () => {
         draggablePercent: 40,
       }
     )
-    var audio = new Audio(sound)
-    audio.play()
   }
 
   useEffect(() => {

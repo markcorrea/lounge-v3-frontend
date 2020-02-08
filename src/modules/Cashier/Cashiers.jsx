@@ -67,19 +67,19 @@ const Cashiers = ({ history }) => {
 
   const columns = [
     {
-      label: 'Name',
+      label: 'Nome',
       name: 'name',
     },
     {
-      label: 'Opened',
+      label: 'Abertura',
       name: 'openDate',
     },
     {
-      label: 'Closed',
+      label: 'Fechamento',
       name: 'closeDate',
     },
     {
-      label: 'Total Price',
+      label: 'Valor Total',
       name: 'price',
       display: 'currency',
     },
@@ -98,9 +98,9 @@ const Cashiers = ({ history }) => {
         >
           <i className='fas fa-plus' />
         </span>
-        <span className='text'>New cashier</span>
+        <span className='text'>Novo caixa</span>
       </a>
-      <h1 className='h3 mb-2 text-gray-800'>Cashiers</h1>
+      <h1 className='h3 mb-2 text-gray-800'>Caixas</h1>
       <p>&nbsp;</p>
       <div className='card shadow mb-4'>
         <div className='card-body'>
@@ -130,8 +130,8 @@ const Cashiers = ({ history }) => {
       </div>
       <ChoiceModal
         id='openCashier'
-        title='Open Cashier'
-        description='Open new cashier with current user?'
+        title='Abrir Caixa'
+        description='Abrir novo caixa com o usuário atual?'
         onConfirm={() => openNewCashier()}
       />
     </Fragment>

@@ -37,7 +37,7 @@ const Terminal = ({ match: { params }, history }) => {
       }
     }
 
-    alert('Terminal not found')
+    alert('Terminal não encontrado')
     history.push('/main/terminals')
   }
 
@@ -52,7 +52,7 @@ const Terminal = ({ match: { params }, history }) => {
     const result = await service(body)
     if (result) {
     } else {
-      showMessage('Error: could not register terminal', 'error')
+      showMessage('Erro: Não foi possível registrar terminal.', 'error')
       return
     }
     history.push('/main/terminals')
@@ -69,7 +69,7 @@ const Terminal = ({ match: { params }, history }) => {
       <div className='row'>
         <div className='col-md-6 col-sm-12'>
           <div className='form-group'>
-            <div className='small mb-1'>Name:</div>
+            <div className='small mb-1'>Nome:</div>
             <input
               name='name'
               type='text'
@@ -86,13 +86,13 @@ const Terminal = ({ match: { params }, history }) => {
             className='btn btn-success btn-icon-split react-link form-button'
             onClick={() => save(terminal)}
           >
-            <span className='text'>Save</span>
+            <span className='text'>Salvar</span>
           </a>
           <a
             className='btn btn-light btn-icon-split form-button'
             onClick={() => history.push('/main/terminals')}
           >
-            <span className='text'>Cancel</span>
+            <span className='text'>Cancelar</span>
           </a>
         </div>
       </div>

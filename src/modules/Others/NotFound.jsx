@@ -1,3 +1,3 @@
 import React from 'react'
 
-export default () => <div>Page Not Found</div>
+export default () => <div>Página não encontrada</div>

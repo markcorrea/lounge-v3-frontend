@@ -1,10 +1,10 @@
 {
-  "name": "komanda-frontend",
+  "name": "comanda-smart-frontend",
   "resolutions": {
     "babel-core": "7.0.0-bridge.0"
   },
   "version": "1.0.0",
-  "description": "Komanda Frontend",
+  "description": "Comanda Smart Frontend",
   "scripts": {
     "start": "npm run build",
     "build": "webpack -d && cp ./index.html dist/index.html && webpack-dev-server --hot --open",

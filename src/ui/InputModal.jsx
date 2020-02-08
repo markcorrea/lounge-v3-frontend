@@ -25,7 +25,7 @@ const InputModal = ({ id, title, description, onConfirm }) => {
               type='button'
               className='close'
               data-dismiss='modal'
-              aria-label='Close'
+              aria-label='Fechar'
             >
               <span aria-hidden='true'>&times;</span>
             </button>
@@ -47,14 +47,14 @@ const InputModal = ({ id, title, description, onConfirm }) => {
               className='btn btn-secondary'
               onClick={() => closeModal(id)}
             >
-              Close
+              Fechar
             </button>
             <button
               type='button'
               className='btn btn-primary'
               onClick={clickConfirm}
             >
-              Confirm
+              Confirmar
             </button>
           </div>
         </div>

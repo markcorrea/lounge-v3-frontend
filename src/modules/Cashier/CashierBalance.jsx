@@ -11,17 +11,17 @@ const CashierBalance = ({ match: { params }, history, userData }) => {
 
   const columns = [
     {
-      label: 'Product',
+      label: 'Produto',
       name: 'name',
     },
     {
-      label: 'Ticket',
+      label: 'Comanda',
       name: 'uniqueCode',
     },
     {
-      label: 'Price',
+      label: 'Valor',
       name: 'price',
-      display: 'currency'
+      display: 'currency',
     },
   ]
 
@@ -35,7 +35,6 @@ const CashierBalance = ({ match: { params }, history, userData }) => {
   }
 
   useEffect(() => {
- 
     fetchCashier()
   }, [])
 
@@ -45,13 +44,13 @@ const CashierBalance = ({ match: { params }, history, userData }) => {
       history.push(`/main/cashiers`)
       return
     }
-    showMessage('Error: could not close the cashier', 'info')
+    showMessage('Erro: não foi possível fechar o caixa', 'info')
   }
 
   return (
     <Fragment>
-      <h1 className='h3 mb-2 text-gray-800'>Cashier - Balance</h1>
-      <p className='mb-4'>List of Sales.</p>
+      <h1 className='h3 mb-2 text-gray-800'>Caixa - Fechamento</h1>
+      <p className='mb-4'>Lista de Vendas.</p>
 
       <div className='card shadow mb-4'>
         <div className='card-body'>
@@ -77,25 +76,28 @@ const CashierBalance = ({ match: { params }, history, userData }) => {
       </div>
       <div className='row'>
         <div className='col-md-12'>
-          <button 
-            disabled={((userData && userData.name) !== (cashier && cashier.name)) || cashier && cashier.closeDate}
+          <button
+            disabled={
+              (userData && userData.name) !== (cashier && cashier.name) ||
+              (cashier && cashier.closeDate)
+            }
             className='btn btn-primary btn-icon-split react-link form-button'
             onClick={() => openModal('closeCashier')}
           >
-            <span className='text'>Close cashier</span>
+            <span className='text'>Fechar caixa</span>
           </button>
           <a
             className='btn btn-light btn-icon-split form-button'
             onClick={() => history.push(`/main/cashier/${cashierId}`)}
           >
-            <span className='text'>No thanks</span>
+            <span className='text'>Não, obrigado</span>
           </a>
         </div>
       </div>
       <ChoiceModal
         id='closeCashier'
-        title='Close cashier'
-        description='Confirm closing this cashier?'
+        title='Fechar caixa'
+        description='Confirma fechamento de caixa?'
         onConfirm={() => closeCurrentCashier()}
       />
     </Fragment>

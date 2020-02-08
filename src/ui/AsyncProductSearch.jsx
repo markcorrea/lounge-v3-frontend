@@ -101,7 +101,7 @@ class AsyncProductSearch extends React.Component {
               type='text'
               disabled={this.props.disabled}
               className='form-control form-control-user'
-              placeholder='Insert product name or code'
+              placeholder='Digite o nome ou código do produto'
               value={this.state.search}
               onChange={this.handleInputChange}
               name='productInput'
@@ -129,7 +129,7 @@ class AsyncProductSearch extends React.Component {
             >
               <i className='fas fa-plus' />
             </span>
-            <span className='text'>Product</span>
+            <span className='text'>Produto</span>
           </button>
         </div>
       </div>

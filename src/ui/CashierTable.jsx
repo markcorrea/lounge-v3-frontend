@@ -41,7 +41,7 @@ const RenderRows = ({ columns, data, clickRow }) => {
       ))}
       {data.length < 1 && (
         <tr>
-          <td colSpan={6}>There are no pending items.</td>
+          <td colSpan={6}>Não há itens pendentes.</td>
         </tr>
       )}
     </Fragment>
@@ -62,11 +62,11 @@ const CashierTable = props => {
   }
 
   const BodyInformation = () => {
-    return `Confirm operation?`
+    return `Confirmar operação?`
   }
 
   const InputModalInformation = () => {
-    return `Insert the value to credit:`
+    return `Insira o valor para crédito:`
   }
 
   const confirmInputModal = (input) => {
@@ -121,26 +121,26 @@ const CashierTable = props => {
         onClick={() => clickReturn(list.filter(item => item.checked), 'pay')}
         className='btn btn-success right ml-20'
       >
-        {props.buttonSelectedLabel || 'Return Selected'}
+        {props.buttonSelectedLabel || 'Retornar Selecionados'}
       </button>
       <button onClick={() => clickReturn(list, 'close')} className='btn btn-danger left mr-20'>
-        {props.closeTicketLabel || 'Close Ticket'}
+        {props.closeTicketLabel || 'Fechar Comanda'}
       </button>
       {/* <button onClick={() => openModal('inputModal')} className='btn btn-warning left mr-20'>
-        {props.creditLabel || 'Credit'}
+        {props.creditLabel || 'Creditar'}
       </button> */}
       <button onClick={() => clickReturn(list.filter(item => item.checked), 'remove' )} className='btn btn-danger right ml-20'>
-        {props.buttonDeleteLabel || 'Delete Selected'}
+        {props.buttonDeleteLabel || 'Remover Selecionados'}
       </button>
       <ChoiceModal
         id='choiceModal'
-        title='Confirmation'
+        title='Confirmar'
         description={<BodyInformation />}
         onConfirm={() => props.returnCashierTable(itemsToReturn, operation)}
       />
       <CurrencyInputModal
         id='inputModal'
-        title='Insert value'
+        title='Digite o valor'
         description={<InputModalInformation />}
         onConfirm={(input) => confirmInputModal(input)}
       />

@@ -48,24 +48,24 @@ const CashierSale = ({ match: { params }, history }) => {
       history.push(`/main/cashier/${cashierId}`)
       return
     }
-    showMessage('Error: could not register payment.', 'info')
+    showMessage('Erro: Não foi possível registrar o pagamento.', 'info')
     return
   }
 
   const ConfirmInformation = () => {
-    return `Confirm paying these items?`
+    return `Confirmar pagamento destes itens?`
   }
 
   return (
     <Fragment>
-      <h1 className='h3 mb-2 text-gray-800'>Cashier - New Sale</h1>
+      <h1 className='h3 mb-2 text-gray-800'>Caixa - Nova Venda</h1>
       <p className='mb-4'>
-        Add products to the table to register the sale.
+        Adiciona produtos na lista para registrar nova venda.
       </p>
 
       <div className='card shadow mb-4'>
         <div className='card-body'>
-          <div className='card-body-title'>Add product</div>
+          <div className='card-body-title'>Adicionar produto</div>
           <div className='table-responsive'>
             <div className='row'>
               <div className='col-md-12'>
@@ -83,7 +83,7 @@ const CashierSale = ({ match: { params }, history }) => {
 
       <div className='card shadow mb-4'>
         <div className='card-body'>
-          <div className='card-body-title'>Opened</div>
+          <div className='card-body-title'>Abertos</div>
           <div className='table-responsive'>
             <div className='row'>
               <div className='col-md-12'>
@@ -95,16 +95,16 @@ const CashierSale = ({ match: { params }, history }) => {
                 >
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Price</th>
-                      <th>Remove</th>
+                      <th>Nome</th>
+                      <th>Valor</th>
+                      <th>Remover</th>
                     </tr>
                   </thead>
                   <tbody>
                     {products.length < 1 && (
                       <tr>
                         <td colSpan={3}>
-                          No products added for sale.
+                          Nenhum produto adicionado para venda.
                         </td>
                       </tr>
                     )}
@@ -147,7 +147,7 @@ const CashierSale = ({ match: { params }, history }) => {
                   className='btn btn-link right ml-20'
                   onClick={() => history.push(`/main/cashier/${cashierId}`)}
                 >
-                  <span className='text'>Cancelar</span>
+                  <span className='text'>Não, obrigado</span>
                 </a>
               </div>
             </div>
