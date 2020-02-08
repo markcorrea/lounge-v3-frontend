@@ -1,7 +1,12 @@
 import React, { Fragment, useState, useEffect } from 'react'
+import MaskedInput from 'react-text-mask'
 
 import services from '@services'
-import { showMessage } from '../../utilities'
+import {
+  showMessage,
+  dateToBrazilianString,
+  brazilianStringToDate,
+} from '../../utilities'
 
 const Client = ({ match: { params }, history }) => {
   const { getClient, saveClient, updateClient } = services
@@ -12,6 +17,7 @@ const Client = ({ match: { params }, history }) => {
     name: '',
     uniqueCode: 0,
   })
+  // https://text-mask.github.io/text-mask/
 
   useEffect(() => {
     ;(async () => {
@@ -26,7 +32,12 @@ const Client = ({ match: { params }, history }) => {
     const result = await getClient(clientId)
     if (result) {
       if (isMounted) {
-        setClient(result.data.client)
+        const newClient = result.data.client
+        if (newClient.birthDate) {
+          newClient.birthDate = dateToBrazilianString(newClient.birthDate)
+        }
+
+        setClient(newClient)
       }
       return () => {
         isMounted = false
@@ -45,6 +56,9 @@ const Client = ({ match: { params }, history }) => {
 
   const save = async body => {
     let service = clientId ? updateClient : saveClient
+    if (body.birthDate) {
+      body.birthDate = brazilianStringToDate(body.birthDate)
+    }
     const result = await service(body)
     if (result) {
     } else {
@@ -90,7 +104,8 @@ const Client = ({ match: { params }, history }) => {
         <div className='col-md-6 col-sm-12'>
           <div className='form-group'>
             <div className='small mb-1'>Telefone:</div>
-            <input
+            <MaskedInput
+              mask={['(', /\d/, /\d/, ')', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
               name='telephone'
               type='text'
               className='form-control form-control-user'
@@ -102,7 +117,8 @@ const Client = ({ match: { params }, history }) => {
         <div className='col-md-6 col-sm-12'>
           <div className='form-group'>
             <div className='small mb-1'>Data de Nascimento:</div>
-            <input
+            <MaskedInput
+              mask={[/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]}
               name='birthDate'
               type='text'
               className='form-control form-control-user'
@@ -111,6 +127,7 @@ const Client = ({ match: { params }, history }) => {
             />
           </div>
         </div>
+        {/* \(\d{2,}\) \d{4,}\-\d{4} */}
         <div className='col-md-6 col-sm-12'>
           <div className='form-group'>
             <div className='small mb-1'>E-mail:</div>
